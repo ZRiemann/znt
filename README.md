@@ -40,21 +40,21 @@ node topology
 ### Welcom to znt
 
 znt(Net Topology) aims to be the distributed system framework.
-> 
->  +--------------------------------------------+<br/>
->  |                 application                |<br/>
->  +--------------------------------------------+<br/>
->  |     | application interface layer |   |    |<br/>
->  |     |-----------------------------+   |    |<br/>
->  | znt |     node topology layer         |    |<br/>
->  |     |---------------------------------+    |<br/>
->  |     |         communicate layer            |<br/>
->  +-----|--------------------------------------+<br/>
->  | zsi | select | epoll | state-threads | iocp|<br/>
->  +--------------------------------------------+<br/>
->  | Linux(CentOS/Ubuntu)    |    Windows       |<br/>
->  +--------------------------------------------+<br/>
-> 
+
+- +--------------------------------------------+
+- |                 application                |
+- +--------------------------------------------+
+- |     | application interface layer |   |    |
+- |     |-----------------------------+   |    |
+- | znt |     node topology layer         |    |
+- |     |---------------------------------+    |
+- |     |         communicate layer            |
+- +-----|--------------------------------------+
+- | zsi | select | epoll | state-threads | iocp|
+- +--------------------------------------------+
+- | Linux(CentOS/Ubuntu)    |    Windows       |
+- +--------------------------------------------+
+ 
 
 ### Building
 
