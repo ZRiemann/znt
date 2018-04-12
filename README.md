@@ -42,17 +42,17 @@ node topology
 znt(Net Topology) aims to be the distributed system framework.
 
 > +--------------------------------------------+<br/>
-> |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ application\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |<br/>
+> |	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;application	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
 > +--------------------------------------------+<br/>
-> |\ \ \ \ \ \|\ application interface layer\ |\ \ \ \|\ \ \ \ \|<br/>
-> |\ \ \ \ \ \|-----------------------------+\ \ \ \|\ \ \ \ \|<br/>
-> |\ znt\ \|\ \ \ \ \ \node topology layer\ \ \ \ \ \ \ \ \ \|\ \ \ \ \|<br/>
-> |\ \ \ \ \ \|---------------------------------+\ \ \ \ \|<br/>
-> |\ \ \ \ \ \|\ \ \ \ \ \ \ \ \ \communicate layer\ \ \ \ \ \ \ \ \ \ \ \ \|<br/>
+> |	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|	&nbsp;application interface layer	&nbsp;|	&nbsp;	&nbsp;	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
+> |	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|-----------------------------+	&nbsp;	&nbsp;	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
+> |	&nbsp;znt	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;node topology layer	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
+> |	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|---------------------------------+	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
+> |	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;communicate layer	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
 > +-----|--------------------------------------+<br/>
-> |\ \zsi\ \|\ \select\ \|\ \epoll\ \|\ \state-threads\ \|\ iocp|<br/>
+> |	&nbsp;zsi	&nbsp;|	&nbsp;select	&nbsp;|	&nbsp;epoll	&nbsp;|	&nbsp;state-threads	&nbsp;|	&nbsp;iocp|<br/>
 > +--------------------------------------------+<br/>
-> |\ Linux(CentOS/Ubuntu)\ \ \ \ \|\ \ \ \ Windows\ \ \ \ \ \ \ \|<br/>
+> |	&nbsp;Linux(CentOS/Ubuntu)	&nbsp;	&nbsp;	&nbsp;	&nbsp;|	&nbsp;	&nbsp;	&nbsp;	&nbsp;Windows	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;	&nbsp;|<br/>
 > +--------------------------------------------+<br/>
  
 
