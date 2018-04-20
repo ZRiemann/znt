@@ -26,7 +26,7 @@
 #define _ZCOM_ST_H_
 
 /**
- * @file zstate_threads.h
+ * @file state_threads.h
  * @brief Wrap State-Threads functions
  * @author Z.Riemann https://github.com/ZRiemann/
  * @date 2018-04-04 Z.Riemann found
@@ -93,6 +93,7 @@
  *      * Timeouts are measured <since the last context switch>
  *      st_netfd_open() ; set non-blocking. NOT passing fd to normal IO functions, instead of st_*()
  *      st_netfd_open_socket() ; slightly more efficient than st_netfd_open(), only be used on SOCKETS
+ *                             ; st_netfd_t st_netfd_open_socket(int osfd);
  *      st_netfd_free() ; free a file descriptor object WITHOUT CLOSING the underlying OS file descriptor.
  *      st_netfd_close() ; free and closes the underlying OS file descriptor.
  *      st_netfd_fileno() ; returns an underlying OS file descriptor.
@@ -158,7 +159,7 @@ zinline zerr_t zst_init(zoperate pre_init, zoperate post_init){
     if(pre_init){
         pre_init(zop_null);
     }
-    if(-1 == zst_init()){
+    if(-1 == st_init()){
         zerrno(errno);
         return ZEFAIL;
     }
@@ -215,14 +216,24 @@ zinline zerr_t zst_thread_join(st_thread_t thread){
         zdbg("join st_thread<ptr:%p, ret:%p>", thread, ret);
     }else{
         /*  EINVAL  Target thread is unjoinable.
-         *  EINVAL  Other thread already waits on the same joinable thread. 
-         *  EDEADLK  Target thread is the same as the calling thread. 
-         *  EINTR  Current thread was interrupted by st_thread_interrupt(). 
+         *  EINVAL  Other thread already waits on the same joinable thread.
+         *  EDEADLK  Target thread is the same as the calling thread.
+         *  EINTR  Current thread was interrupted by st_thread_interrupt().
          */
         zerrno(errno);
         return ZEFAIL;
     }
     return ZEOK;
+}
+
+zinline st_netfd_t zst_socket(int osfd){
+    st_netfd_t stfd = st_netfd_open_socket(osfd);
+    if(NULL == stfd){
+        zerrno(ZEFAIL);
+    }else{
+        zdbg("create stfd<%p> by osfd<%d>", stfd, osfd);
+    }
+    return stfd;
 }
 
 #endif /* ZSYS_POSIX */

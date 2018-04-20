@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #===============================================================================
 # MIT License
@@ -93,7 +93,7 @@ cl_c="\\033[0m"
 
 #===============================================================================
 # Generate Makefile
-zmake_header="zmake_def.h"
+zmake_header="zmakedefs.h"
 
 # backup the exist dir or files, <name> => <name>.backup
 function backup(){
@@ -171,6 +171,28 @@ if [ -z ${zgit_rev##*/git} ]; then
 else
     zgit_rev="nil"
 fi
+
+# generate zmake definitions header file
+# zmakedefs.h
+cat << !ZMAKE_DEF! > ${zmake_header}
+/**
+ * MIT License
+ * Copyright (C) Z.Riemann
+ * https://github.com/ZRiemann/zmake.git
+ */
+#ifndef _ZMAKE_DEF_H_
+#define _ZMAKE_DEF_H_
+
+#define zmake_version "${zversion}"
+#define zmake_vmajor "${zver_major}"
+#define zmake_vminor "${zver_minor}"
+#define zmake_vrevision "${zver_revision}"
+#define zmake_albt "${zver_albt}"
+#define zmake_build_date "$(date '+%Y%m%d%H%M%S')"
+#define zmake_git_rev "${zgit_rev}"
+#endif
+!ZMAKE_DEF!
+
 
 # generate micro definitions
 cat << !MAKE_ALL! > $zmake_all
@@ -445,26 +467,6 @@ echo >> Makefile
 echo >> Makefile
 echo "prepare:" >> Makefile
 printf "\t@mkdir -p \$(BUILDS_DIR) \$(OBJ_DIR) ${zmake_subdir}\n" >> Makefile
-printf "\t@echo \"/**\" > \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" * MIT License\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" * Copyright (C) Z.Riemann\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" * https://github.com/ZRiemann/zmake.git\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" *\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" * This file auto genrated by zmake configure\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \" */\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \"#ifndef _ZMAKE_H_\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \"#define _ZMAKE_H_\" >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_version \"\$(VERSION)\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_vmajor \"\$(VER_MAJOR)\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_vminor \"\$(VER_MINOR)\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_vrevision \"\$(VER_REVISION)\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_albt \"\$(VER_ALBT)\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-printf "\t@echo \'#define zmake_build_date \"\$(shell date '+%%Y%%m%%d%%H%%M%%S')\"\' >> \$(ZMAKE_HEADER)\n" >> Makefile
-if [ "nil" != ${zgit_rev} ]; then
-    printf "\t@echo \'#define zmake_git_rev \"\$(shell git rev-parse HEAD)\"\'>> \$(ZMAKE_HEADER)\n" >> Makefile
-fi
-printf "\t@echo \"#endif\" >> \$(ZMAKE_HEADER)\n" >> Makefile
 
 # target1 : obj1 obj2 ...
 for target in $zmake_target; do
@@ -597,7 +599,7 @@ done
 echo >> Makefile
 echo "# clean up" >> Makefile
 echo "clean :" >> Makefile
-printf "\t@rm -fr \$(BIN_ROOT) ${zmake_header}" >> Makefile
+printf "\t@rm -fr \$(BIN_ROOT)" >> Makefile
 
 
 # remove temporary file
